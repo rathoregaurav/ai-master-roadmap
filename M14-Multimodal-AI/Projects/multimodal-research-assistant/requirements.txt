@@ -1,0 +1,6 @@
+httpx>=0.27.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+# Optional: pdf2image for PDF support
+# pdf2image>=1.16.0

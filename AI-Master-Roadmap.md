@@ -177,6 +177,8 @@
 
 *Goal: Stay ahead of the curve. All the "nice-to-haves" live here.*
 
+*Detailed guide → [`PHASE-6-FUTURE-PROOFING.md`](./PHASE-6-FUTURE-PROOFING.md)*
+
 - **Week 25:** M14 (Multimodal AI)
   - Vision models (GPT-4o vision, Claude 3.5)
   - OCR for scanned PDFs
@@ -202,6 +204,8 @@
 ---
 
 ## PHASE 7: The Capstone Crucible (Weeks 31–36)
+
+*Detailed guide → [`PHASE-7-CAPSTONE-CRUCIBLE.md`](./PHASE-7-CAPSTONE-CRUCIBLE.md)*
 
 *Goal: Build your definitive portfolio piece that combines EVERYTHING.*
 
@@ -233,6 +237,8 @@ Build **"Enterprise Sentinel"** – an end-to-end AI system that:
 ---
 
 ## PHASE 8: COMPLETE STAFF AI ADDENDUM
+
+*Detailed guide → [`PHASE-8-STAFF-AI-ADDENDUM.md`](./PHASE-8-STAFF-AI-ADDENDUM.md)*
 
 *Advanced Topics & Continuous Development*
 

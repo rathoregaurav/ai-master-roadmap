@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-supervisor
+  namespace: enterprise-sentinel
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: agent-supervisor
+  template:
+    metadata:
+      labels:
+        app: agent-supervisor
+    spec:
+      containers:
+      - name: supervisor
+        image: enterprise-sentinel/supervisor:latest
+        ports:
+        - containerPort: 8002
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: sentinel-secrets
+              key: openai_api_key
+        - name: RAG_WORKER_URL
+          value: "http://rag-worker:8003"
+        - name: SQL_WORKER_URL
+          value: "http://sql-worker:8004"
+        - name: VISION_WORKER_URL
+          value: "http://vision-worker:8005"
+        - name: GUARDRAIL_URL
+          value: "http://guardrails:8006"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8002
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8002
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent-supervisor
+  namespace: enterprise-sentinel
+spec:
+  selector:
+    app: agent-supervisor
+  ports:
+  - port: 8002
+    targetPort: 8002
+  type: ClusterIP

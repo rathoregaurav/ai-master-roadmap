@@ -1,0 +1,149 @@
+version: "3.8"
+
+services:
+  # ── MCP Server ──
+  mcp-server:
+    build:
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    env_file: .env
+    volumes:
+      - ./data:/data
+    networks:
+      - sentinel-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Agent Supervisor ──
+  agent-supervisor:
+    build:
+      context: ./agent-supervisor
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    env_file: .env
+    environment:
+      - RAG_WORKER_URL=http://rag-worker:8003
+      - SQL_WORKER_URL=http://sql-worker:8004
+      - VISION_WORKER_URL=http://vision-worker:8005
+      - GUARDRAIL_URL=http://guardrails:8006
+    depends_on:
+      - rag-worker
+      - sql-worker
+      - vision-worker
+      - guardrails
+    networks:
+      - sentinel-net
+
+  # ── RAG Worker ──
+  rag-worker:
+    build:
+      context: ./rag-worker
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    env_file: .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    networks:
+      - sentinel-net
+
+  # ── SQL Worker ──
+  sql-worker:
+    build:
+      context: ./sql-worker
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sentinel-net
+
+  # ── Vision Worker ──
+  vision-worker:
+    build:
+      context: ./vision-worker
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8005"
+    env_file: .env
+    networks:
+      - sentinel-net
+
+  # ── Guardrails ──
+  guardrails:
+    build:
+      context: ./guardrails
+      dockerfile: Dockerfile
+    ports:
+      - "8006:8006"
+    env_file: .env
+    networks:
+      - sentinel-net
+
+  # ── Qdrant (Vector DB) ──
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - sentinel-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── PostgreSQL ──
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: sentinel
+      POSTGRES_USER: sentinel
+      POSTGRES_PASSWORD: sentinel_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql-worker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - sentinel-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sentinel"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Nginx API Gateway ──
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - agent-supervisor
+    networks:
+      - sentinel-net
+
+networks:
+  sentinel-net:
+    driver: bridge
+
+volumes:
+  qdrant_data:
+  postgres_data:

@@ -1,0 +1,288 @@
+# Enterprise Sentinel
+
+> **Phase 7 · Capstone Project · Weeks 31–36**
+
+---
+
+## Overview
+
+Enterprise Sentinel is an end-to-end AI system that ingests multimodal data (PDFs, images, Slack transcripts), routes queries via an Agentic Supervisor to specialized workers, includes Human-in-the-Loop approval, full observability, guardrails, and Kubernetes deployment.
+
+**This is the project that lands you your next role.**
+
+---
+
+## Architecture
+
+```mermaid
+graph TD
+    subgraph "Ingestion Layer"
+        A1[PDFs] --> M[MCP Connector]
+        A2[Images] --> M
+        A3[Slack Transcripts] --> M
+        A4[Webhooks] --> M
+    end
+    
+    M --> B[Agentic Supervisor]
+    
+    subgraph "Worker Layer"
+        B -->|Document Q| C1[RAG Worker]
+        B -->|Structured Data| C2[SQL Worker]
+        B -->|Images| C3[Vision Worker]
+        B -->|Code| C4[Code Worker]
+    end
+    
+    subgraph "Safety Layer"
+        D1[Input Guardrails] -.-> B
+        D2[PII Scrubber] -.-> C1
+        D2 -.-> C2
+        D3[Output Guardrails] -.-> C3
+    end
+    
+    C1 --> E[Output Synthesizer]
+    C2 --> E
+    C3 --> E
+    C4 --> E
+    
+    subgraph "Observability"
+        F1[OpenTelemetry] -.-> B
+        F1 -.-> C1
+        F1 -.-> C2
+        F1 -.-> C3
+        F2[Cost Tracker] -.-> E
+    end
+    
+    E --> H[Final Response]
+    
+    I[Human-in-Loop] -.->|Destructive Actions| B
+    J[Prompt Registry] -.-> B
+```
+
+---
+
+## Project Structure
+
+```
+enterprise-sentinel/
+├── README.md
+├── docker-compose.yml
+├── Makefile
+├── .env.example
+│
+├── mcp-server/                    # MCP Connector for ingestion
+│   ├── server.py
+│   ├── handlers/
+│   │   ├── pdf_handler.py
+│   │   ├── image_handler.py
+│   │   └── slack_handler.py
+│   └── requirements.txt
+│
+├── agent-supervisor/              # Agentic orchestrator
+│   ├── supervisor.py
+│   ├── router.py
+│   ├── checkpoint.py
+│   ├── hitl.py
+│   └── requirements.txt
+│
+├── rag-worker/                    # RAG pipeline
+│   ├── worker.py
+│   ├── ingestion/
+│   │   ├── chunker.py
+│   │   └── embedder.py
+│   ├── retrieval/
+│   │   ├── vector_store.py
+│   │   └── hybrid_search.py
+│   ├── generation/
+│   │   └── generator.py
+│   └── requirements.txt
+│
+├── sql-worker/                    # Structured data worker
+│   ├── worker.py
+│   ├── schema_parser.py
+│   ├── query_builder.py
+│   └── requirements.txt
+│
+├── vision-worker/                 # Multimodal worker
+│   ├── worker.py
+│   ├── analyzer.py
+│   ├── ocr_processor.py
+│   └── requirements.txt
+│
+├── guardrails/                    # Safety layer
+│   ├── input_guard.py
+│   ├── pii_scrubber.py
+│   ├── output_guard.py
+│   └── requirements.txt
+│
+├── observability/                 # Monitoring
+│   ├── tracer.py
+│   ├── cost_tracker.py
+│   ├── metrics.py
+│   └── requirements.txt
+│
+├── kubernetes/                    # Deployment manifests
+│   ├── namespace.yaml
+│   ├── configmap.yaml
+│   ├── mcp-server.yaml
+│   ├── agent-supervisor.yaml
+│   ├── rag-worker.yaml
+│   ├── sql-worker.yaml
+│   ├── vision-worker.yaml
+│   ├── guardrails.yaml
+│   ├── qdrant-statefulset.yaml
+│   ├── postgres-statefulset.yaml
+│   ├── hpa.yaml
+│   └── ingress.yaml
+│
+├── tests/                         # Test suite
+│   ├── test_rag.py
+│   ├── test_sql.py
+│   ├── test_vision.py
+│   ├── test_guardrails.py
+│   ├── test_supervisor.py
+│   └── conftest.py
+│
+├── docs/                          # Documentation
+│   ├── architecture.md
+│   ├── deployment.md
+│   ├── api.md
+│   └── security.md
+│
+└── scripts/                       # Utility scripts
+    ├── setup.sh
+    ├── seed_data.py
+    └── benchmark.py
+```
+
+---
+
+## Quick Start
+
+```bash
+# 1. Clone and setup
+git clone <repo-url> && cd enterprise-sentinel
+cp .env.example .env
+# Edit .env with your API keys
+
+# 2. Start with Docker Compose
+docker-compose up -d
+
+# 3. Seed test data
+python scripts/seed_data.py
+
+# 4. Run tests
+pytest tests/
+
+# 5. Send a test query
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"query": "What is RAG?", "user_id": "test"}'
+```
+
+---
+
+## Services
+
+| Service | Port | Description |
+|---------|------|-------------|
+| MCP Server | 8001 | Multimodal data ingestion |
+| Agent Supervisor | 8002 | Query routing & orchestration |
+| RAG Worker | 8003 | Document retrieval & generation |
+| SQL Worker | 8004 | Structured data queries |
+| Vision Worker | 8005 | Image analysis & OCR |
+| Guardrails | 8006 | Input/output safety |
+| Qdrant | 6333 | Vector database |
+| PostgreSQL | 5432 | Relational database |
+
+---
+
+## API Reference
+
+### POST /query
+Main entry point for all queries.
+
+```json
+{
+  "query": "What were our Q4 sales?",
+  "user_id": "user_123",
+  "context": {
+    "attachments": ["sales_report.pdf", "chart.png"]
+  }
+}
+```
+
+### POST /ingest
+Ingest documents into the knowledge base.
+
+```json
+{
+  "type": "pdf",
+  "file_path": "/data/report.pdf",
+  "metadata": {
+    "source": "slack",
+    "channel": "#sales"
+  }
+}
+```
+
+### GET /health
+Health check for all services.
+
+### GET /metrics
+Prometheus metrics endpoint.
+
+---
+
+## Development
+
+```bash
+# Run all services locally
+make dev
+
+# Run specific service
+make dev-supervisor
+make dev-rag
+
+# Run tests
+make test
+make test-e2e
+
+# Build Docker images
+make build
+make build-all
+
+# Deploy to Kubernetes
+make deploy
+```
+
+---
+
+## Evaluation
+
+| Metric | Target | Current |
+|--------|--------|---------|
+| RAG Groundedness | >95% | — |
+| SQL Accuracy | >98% | — |
+| Vision Accuracy | >90% | — |
+| Guardrail Detection | >99% | — |
+| P95 Latency | <2s | — |
+| Cost per Query | <$0.05 | — |
+| Uptime | >99.9% | — |
+
+---
+
+## Security
+
+- [x] Prompt injection detection on all inputs
+- [x] PII scrubbing before LLM calls
+- [x] Output content filtering
+- [x] HITL for destructive actions
+- [x] Audit logging for all queries
+- [x] Rate limiting per user
+- [x] Secrets management via environment
+
+---
+
+## License
+
+MIT — Built as a portfolio project for AI-Master-Roadmap.
