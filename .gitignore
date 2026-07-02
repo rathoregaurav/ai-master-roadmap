@@ -6,3 +6,6 @@ __pycache__/
 .venv/
 venv/
 
+# Live-HealthAI-Assistant (complete project folder)
+Live-HealthAI-Assistant/
+
