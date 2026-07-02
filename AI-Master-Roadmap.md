@@ -1,5 +1,18 @@
 # AI-Master-Roadmap: Complete 36-Week Curriculum
 
+## How To Navigate This Roadmap
+
+Start with [README.md](./README.md) if you want the shortest entrypoint. Use this file as the week-by-week plan, [COMPREHENSIVE-THEORY-GUIDE.md](./COMPREHENSIVE-THEORY-GUIDE.md) for deep answers, [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATRIX.md) for completion checks, [99-End-to-End-Practice/](./99-End-to-End-Practice/) for labs, and [Interview-Preparation/](./Interview-Preparation/) for interview practice.
+
+Every phase has four required outputs:
+
+- **Learning:** notes, diagrams, and core theory.
+- **Interview:** concise answers and system design practice.
+- **Actual work:** runnable code, tests/evals, deployment or operating notes.
+- **Portfolio:** README, architecture, demo path, trade-offs, and metrics.
+
+---
+
 ## Guiding Principles
 
 1. **Job market demand in 2026** (RAG and Agents are #1, Multimodal is #5)
@@ -224,6 +237,24 @@ Build **"Enterprise Sentinel"** – an end-to-end AI system that:
 
 ---
 
+## Enterprise Completion Gates
+
+Use these gates before moving from one phase to the next:
+
+| Gate | Required evidence |
+| --- | --- |
+| Learning complete | You can explain every module using the 7-question framework. |
+| Code complete | Examples run, labs are implemented, and known limitations are documented. |
+| Evaluation complete | Golden cases or test cases exist for the phase deliverable. |
+| Security complete | Prompt injection, PII, permissions, and unsafe action risks are addressed. |
+| Observability complete | Logs, traces, latency, model name, token usage, and cost are captured where relevant. |
+| Interview complete | You can give a 60-second answer and a 10-minute system design for the phase. |
+| Portfolio complete | README, architecture diagram, setup, demo, trade-offs, and metrics are present. |
+
+Detailed checklist: [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATRIX.md)
+
+---
+
 ## Summary of Changes (Priority Reordering)
 
 | Original | New Priority | Reasoning |
@@ -329,4 +360,3 @@ Build **"Enterprise Sentinel"** – an end-to-end AI system that:
 - **B)** Interview prep (20 Qs/week)
 - **C)** AI News (arXiv/HF, 30 min/week)
 - **D)** Engineering Hygiene (Testing/Logging/Metrics/Security in every deliverable)
-

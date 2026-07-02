@@ -7,13 +7,12 @@ This folder connects all modules into complete practice work. Each lab forces yo
 | Lab | Level | What you build |
 | --- | --- | --- |
 | Lab 1 | Beginner | LLM API wrapper |
-| Lab 2 | Beginner | Prompt playground with structured output |
-| Lab 3 | Beginner/Intermediate | Text RAG over local notes |
-| Lab 4 | Intermediate | Evaluated RAG platform |
+| Lab 2 | Beginner | Text RAG over local notes |
+| Lab 3 | Beginner/Intermediate | Agentic assistant with tools |
 | Lab 4 | Intermediate | Production hardening |
 | Lab 5 | Intermediate | Enterprise AI platform layer |
-| Lab 6 | Intermediate | Tool-calling assistant |
-| Lab 7 | Advanced | Agentic operations assistant |
+| Lab 6 | Intermediate | Evaluated RAG platform |
+| Lab 7 | Advanced | Tool-calling operations assistant |
 | Lab 8 | Advanced | Memory + MCP + evaluation integration |
 
 ## Runnable Starter Labs
@@ -34,6 +33,23 @@ Each lab should produce:
 - sample outputs
 - tests or evaluation cases
 - reflection notes
+- security and privacy notes
+- cost and latency notes
+- failure-mode notes
+
+## Enterprise Lab Rubric
+
+Use this rubric before marking any lab complete:
+
+| Area | Minimum standard |
+| --- | --- |
+| Learning | You can explain the main pattern in under two minutes. |
+| Code | The happy path runs locally or has a documented dry run. |
+| Tests/eval | At least three test cases or eval cases exist. |
+| Security | Inputs, secrets, and tool permissions are considered. |
+| Observability | Logs or traces show the important steps. |
+| Interview | You can describe architecture, trade-offs, and failure modes. |
+| Portfolio | The README has setup, usage, diagram, and limitations. |
 
 ## Rule
 

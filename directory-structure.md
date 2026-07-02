@@ -289,7 +289,10 @@ Advanced Topics & Continuous Development (content in PHASE-8-STAFF-AI-ADDENDUM.m
 
 ## Phase Guide Files
 
+- **README.md** - Repository entrypoint and recommended learning flow
 - **AI-Master-Roadmap.md** - Main curriculum guide
+- **CURRICULUM-REVIEW.md** - Review report and maintenance checklist
+- **ENTERPRISE-READINESS-MATRIX.md** - Master module and project completion checklist
 - **PHASE-1-LAUNCHPAD.md**
 - **PHASE-2-RAG-FORTRESS.md**
 - **PHASE-3-AGENTIC-STACK.md**

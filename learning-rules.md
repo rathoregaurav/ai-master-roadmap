@@ -225,3 +225,22 @@ It is better to deeply understand one topic than superficially finish five.
 # Rule 10
 
 Every module should make me a better engineer, not just a better AI user.
+
+---
+
+## Enterprise Definition of Done
+
+Use this standard for every module and project:
+
+- [ ] **Learning:** I can explain what the topic is, why it exists, how it works, where it is used, alternatives, and trade-offs.
+- [ ] **Code:** I ran or wrote code that demonstrates the concept.
+- [ ] **Debugging:** I intentionally broke one example and fixed it.
+- [ ] **Interview:** I can answer 3-5 questions without reading notes.
+- [ ] **System design:** I can draw where this topic fits in a real AI platform.
+- [ ] **Security:** I identified input, data, permission, and output risks.
+- [ ] **Observability:** I know what to log, measure, trace, and alert on.
+- [ ] **Cost:** I can explain what drives cost and how to reduce waste.
+- [ ] **Testing/eval:** I created tests, eval cases, or manual verification notes.
+- [ ] **Portfolio:** I updated a README, diagram, demo, or project artifact.
+
+If any box is empty, the module is in progress, not complete.

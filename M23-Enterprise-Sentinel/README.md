@@ -62,14 +62,40 @@ graph TD
 
 ## Project Structure
 
+The current repository contains a lean capstone scaffold plus target deployment files. The Python services are intentionally compact so the learner can read the whole system, then expand it into the full microservice version.
+
+### Current Scaffold
+
 ```
-enterprise-sentinel/
+M23-Enterprise-Sentinel/
 ├── README.md
-├── docker-compose.yml
 ├── Makefile
 ├── .env.example
-│
-├── mcp-server/                    # MCP Connector for ingestion
+├── docker-compose.yml
+├── agent-supervisor/
+│   └── supervisor.py              # Intent classification, routing, approvals, checkpoints
+├── guardrails/
+│   └── input_guard.py             # PII scrubbing and prompt-injection detection
+├── mcp-server/
+│   └── server.py                  # Multimodal ingestion and MCP-style resources/tools
+├── observability/
+│   └── tracer.py                  # Trace and cost tracking utilities
+├── tests/
+│   └── test_e2e.py                # End-to-end behavior checks
+└── kubernetes/
+    ├── namespace.yaml
+    ├── agent-supervisor.yaml
+    ├── hpa.yaml
+    └── ingress.yaml
+```
+
+### Target Enterprise Expansion
+
+Use this as the build-out checklist for the full capstone:
+
+```
+M23-Enterprise-Sentinel/
+├── mcp-server/
 │   ├── server.py
 │   ├── handlers/
 │   │   ├── pdf_handler.py
@@ -159,25 +185,19 @@ enterprise-sentinel/
 ## Quick Start
 
 ```bash
-# 1. Clone and setup
-git clone <repo-url> && cd enterprise-sentinel
+# 1. Setup local environment
+cd M23-Enterprise-Sentinel
 cp .env.example .env
-# Edit .env with your API keys
+# Edit .env with your API key only if you want live model calls
 
-# 2. Start with Docker Compose
-docker-compose up -d
+# 2. Validate Python syntax
+make syntax
 
-# 3. Seed test data
-python scripts/seed_data.py
-
-# 4. Run tests
-pytest tests/
-
-# 5. Send a test query
-curl -X POST http://localhost:8000/query \
-  -H "Content-Type: application/json" \
-  -d '{"query": "What is RAG?", "user_id": "test"}'
+# 3. Run tests when pytest is installed
+make test
 ```
+
+The Docker Compose file represents the target full-stack deployment. It will be ready to run after the worker service folders and Dockerfiles in the target expansion checklist are added.
 
 ---
 
@@ -236,23 +256,22 @@ Prometheus metrics endpoint.
 ## Development
 
 ```bash
-# Run all services locally
-make dev
-
-# Run specific service
-make dev-supervisor
-make dev-rag
+# Compile all Python files
+make syntax
 
 # Run tests
 make test
-make test-e2e
+
+# Validate Docker Compose configuration
+make compose-config
 
 # Build Docker images
-make build
-make build-all
+# Add worker Dockerfiles first, then run:
+docker compose build
 
 # Deploy to Kubernetes
-make deploy
+# Apply manifests after image names and environment-specific values are configured:
+kubectl apply -f kubernetes/
 ```
 
 ---
