@@ -9,15 +9,20 @@ Complete learning path for becoming an enterprise-ready AI engineer. This reposi
 
 ## Start Here
 
+Start with one file:
+
+**[00-Start-Here/README.md](./00-Start-Here/README.md)**
+
+That file explains exactly which folder to open first, what to ignore at the beginning, and how to move through `M0` to `M23`.
+
+After that, use:
+
 | Need | Open |
 | --- | --- |
-| Full 36-week curriculum | [AI-Master-Roadmap.md](./AI-Master-Roadmap.md) |
-| Beginner transition guide | [00-Start-Here/AI-Transition-Guide.md](./00-Start-Here/AI-Transition-Guide.md) |
-| Skill map | [00-Start-Here/AI-Engineer-Skill-Map.md](./00-Start-Here/AI-Engineer-Skill-Map.md) |
-| Complete theory answers | [COMPREHENSIVE-THEORY-GUIDE.md](./COMPREHENSIVE-THEORY-GUIDE.md) |
-| Enterprise readiness matrix | [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATRIX.md) |
-| Curriculum review report | [CURRICULUM-REVIEW.md](./CURRICULUM-REVIEW.md) |
+| Week-by-week curriculum | [AI-Master-Roadmap.md](./AI-Master-Roadmap.md) |
+| Main module path | `M0-*` to `M23-*` |
 | End-to-end labs | [99-End-to-End-Practice/README.md](./99-End-to-End-Practice/README.md) |
+| Deep theory reference | [02-Reference/COMPREHENSIVE-THEORY-GUIDE.md](./02-Reference/COMPREHENSIVE-THEORY-GUIDE.md) |
 | Interview preparation | [Interview-Preparation/README.md](./Interview-Preparation/README.md) |
 
 ## Learning Path
@@ -35,15 +40,15 @@ Complete learning path for becoming an enterprise-ready AI engineer. This reposi
 
 ## How To Use This Repository
 
-For each module:
+For each module in `M0` to `M23`:
 
 1. Read the module `README.md`.
-2. Study the matching section in [COMPREHENSIVE-THEORY-GUIDE.md](./COMPREHENSIVE-THEORY-GUIDE.md).
+2. Study the matching section in [02-Reference/COMPREHENSIVE-THEORY-GUIDE.md](./02-Reference/COMPREHENSIVE-THEORY-GUIDE.md).
 3. Run at least one code example.
 4. Complete the exercise.
 5. Answer the interview questions out loud.
 6. Add the topic to a portfolio project or lab.
-7. Check the module against [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATRIX.md).
+7. Check the module against [02-Reference/ENTERPRISE-READINESS-MATRIX.md](./02-Reference/ENTERPRISE-READINESS-MATRIX.md).
 
 ## Definition Of Done
 
@@ -59,11 +64,11 @@ A module is not complete until you can show:
 ## Repository Map
 
 - `M0-*` to `M23-*`: core modules and capstone.
-- `PHASE-*.md`: phase-level study guides.
+- `01-Phase-Guides/`: phase-level study guides.
+- `00-Start-Here/README.md`: single beginner entry point.
 - `99-End-to-End-Practice/`: hands-on labs that connect modules.
 - `Interview-Preparation/`: system design, technical questions, and use cases.
 - `CheatSheets/`: fast review material.
 - `Portfolio-Productization/`: portfolio polishing checklist.
 - `Papers-and-References/`: important papers and reference notes.
-- `CURRICULUM-REVIEW.md`: review record and maintenance checklist.
-- `directory-structure.md`: full folder map.
+- `02-Reference/`: theory guide, learning rules, readiness matrix, review notes, and folder map.

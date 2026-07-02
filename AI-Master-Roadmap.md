@@ -2,7 +2,7 @@
 
 ## How To Navigate This Roadmap
 
-Start with [README.md](./README.md) if you want the shortest entrypoint. Use this file as the week-by-week plan, [COMPREHENSIVE-THEORY-GUIDE.md](./COMPREHENSIVE-THEORY-GUIDE.md) for deep answers, [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATRIX.md) for completion checks, [99-End-to-End-Practice/](./99-End-to-End-Practice/) for labs, and [Interview-Preparation/](./Interview-Preparation/) for interview practice.
+Start with [README.md](./README.md) if you want the shortest entrypoint. Use this file as the week-by-week plan, [02-Reference/COMPREHENSIVE-THEORY-GUIDE.md](./02-Reference/COMPREHENSIVE-THEORY-GUIDE.md) for deep answers, [02-Reference/ENTERPRISE-READINESS-MATRIX.md](./02-Reference/ENTERPRISE-READINESS-MATRIX.md) for completion checks, [99-End-to-End-Practice/](./99-End-to-End-Practice/) for labs, and [Interview-Preparation/](./Interview-Preparation/) for interview practice.
 
 Every phase has four required outputs:
 
@@ -190,7 +190,7 @@ Every phase has four required outputs:
 
 *Goal: Stay ahead of the curve. All the "nice-to-haves" live here.*
 
-*Detailed guide → [`PHASE-6-FUTURE-PROOFING.md`](./PHASE-6-FUTURE-PROOFING.md)*
+*Detailed guide → [`01-Phase-Guides/PHASE-6-FUTURE-PROOFING.md`](./01-Phase-Guides/PHASE-6-FUTURE-PROOFING.md)*
 
 - **Week 25:** M14 (Multimodal AI)
   - Vision models (GPT-4o vision, Claude 3.5)
@@ -218,7 +218,7 @@ Every phase has four required outputs:
 
 ## PHASE 7: The Capstone Crucible (Weeks 31–36)
 
-*Detailed guide → [`PHASE-7-CAPSTONE-CRUCIBLE.md`](./PHASE-7-CAPSTONE-CRUCIBLE.md)*
+*Detailed guide → [`01-Phase-Guides/PHASE-7-CAPSTONE-CRUCIBLE.md`](./01-Phase-Guides/PHASE-7-CAPSTONE-CRUCIBLE.md)*
 
 *Goal: Build your definitive portfolio piece that combines EVERYTHING.*
 
@@ -251,7 +251,7 @@ Use these gates before moving from one phase to the next:
 | Interview complete | You can give a 60-second answer and a 10-minute system design for the phase. |
 | Portfolio complete | README, architecture diagram, setup, demo, trade-offs, and metrics are present. |
 
-Detailed checklist: [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATRIX.md)
+Detailed checklist: [02-Reference/ENTERPRISE-READINESS-MATRIX.md](./02-Reference/ENTERPRISE-READINESS-MATRIX.md)
 
 ---
 
@@ -269,7 +269,7 @@ Detailed checklist: [ENTERPRISE-READINESS-MATRIX.md](./ENTERPRISE-READINESS-MATR
 
 ## PHASE 8: COMPLETE STAFF AI ADDENDUM
 
-*Detailed guide → [`PHASE-8-STAFF-AI-ADDENDUM.md`](./PHASE-8-STAFF-AI-ADDENDUM.md)*
+*Detailed guide → [`01-Phase-Guides/PHASE-8-STAFF-AI-ADDENDUM.md`](./01-Phase-Guides/PHASE-8-STAFF-AI-ADDENDUM.md)*
 
 *Advanced Topics & Continuous Development*
 
